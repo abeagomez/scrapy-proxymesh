@@ -43,7 +43,7 @@ class SimpleProxymeshMiddleware(object):
 
     def process_request(self, request, spider):
         if not request.meta.get('bypass_proxy', False) and request.meta.get('proxy') is None:
-            creds, proxy = self._get_proxy(self.proxies.next())
+            creds, proxy = self._get_proxy(next(self.proxies))
             request.meta['proxy'] = proxy
             if creds:
                 request.headers['Proxy-Authorization'] = b'Basic ' + creds
